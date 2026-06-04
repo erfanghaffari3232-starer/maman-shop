@@ -86,10 +86,10 @@ function buildFilters() {
         '<div class="filter-group">' +
             '<h4>دسته‌بندی</h4>' +
             '<label><input type="checkbox" checked> همه</label>' +
-            '<label><input type="checkbox"> ______</label>' +
-            '<label><input type="checkbox"> ______</label>' +
-            '<label><input type="checkbox"> ______</label>' +
-            '<label><input type="checkbox"> ______</label>' +
+            '<label><input type="checkbox"> کیک و شیرینی</label>' +
+            '<label><input type="checkbox"> غذا</label>' +
+            '<label><input type="checkbox"> صنایع دستی</label>' +
+            '<label><input type="checkbox"> ترشی و مربا</label>' +
         '</div>' +
         '<div class="filter-group">' +
             '<h4>محدوده قیمت (تومان)</h4>' +
