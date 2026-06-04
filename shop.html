@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه مامان | محصولات خونگی</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Tahoma, sans-serif; background: #f2f2f2; }
+        
+        /* بنر بالای صفحه */
+        .top-banner {
+            background: #e94560; color: white; text-align: center; padding: 8px;
+            font-size: 0.8rem;
+        }
+        
+        /* هدر اصلی */
+        .header {
+            background: white; padding: 15px 20px; display: flex;
+            align-items: center; gap: 15px; flex-wrap: wrap;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;
+        }
+        .logo {
+            font-size: 1.8rem; font-weight: bold; color: #e94560;
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+        }
+        .search-box {
+            flex: 1; display: flex; max-width: 500px;
+        }
+        .search-box input {
+            flex: 1; padding: 10px 15px; border: 2px solid #e0e0e0;
+            border-radius: 0 8px 8px 0; font-family: Tahoma; font-size: 0.9rem;
+        }
+        .search-box input:focus { outline: none; border-color: #e94560; }
+        .search-box button {
+            background: #e94560; color: white; border: none; padding: 10px 20px;
+            border-radius: 8px 0 0 8px; cursor: pointer; font-family: Tahoma;
+        }
+        .header-icons { display: flex; gap: 15px; align-items: center; }
+        .icon-btn {
+            background: none; border: none; font-size: 1.5rem; cursor: pointer;
+            position: relative; text-decoration: none;
+        }
+        .badge {
+            position: absolute; top: -5px; right: -8px; background: #e94560;
+            color: white; border-radius: 50%; width: 18px; height: 18px;
+            font-size: 0.7rem; display: flex; align-items: center; justify-content: center;
+        }
+        
+        /* اسلایدر */
+        .slider {
+            background: linear-gradient(135deg, #e94560, #c73652);
+            color: white; padding: 30px 20px; text-align: center;
+            margin: 15px 20px; border-radius: 20px; position: relative; overflow: hidden;
+        }
+        .slider h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .slider p { font-size: 1rem; opacity: 0.9; margin-bottom: 15px; }
+        .slider-btn {
+            background: white; color: #e94560; border: none; padding: 10px 30px;
+            border-radius: 25px; font-weight: bold; cursor: pointer; font-family: Tahoma;
+            font-size: 1rem; transition: 0.3s;
+        }
+        .slider-btn:hover { transform: scale(1.05); }
+        
+        /* نوار دسته‌بندی */
+        .cat-nav {
+            display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto;
+            background: white; margin: 0 20px; border-radius: 15px;
+        }
+        .cat-item {
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+            padding: 10px 15px; cursor: pointer; transition: 0.3s; border-radius: 12px;
+            min-width: 70px; text-decoration: none; color: #333; font-size: 0.8rem;
+        }
+        .cat-item:hover { background: #fff0f0; }
+        .cat-item.active { background: #ffe0e0; color: #e94560; font-weight: bold; }
+        .cat-icon { font-size: 1.8rem; }
+        
+        /* بخش اصلی */
+        .main-content { display: flex; gap: 15px; padding: 20px; max-width: 1300px; margin: 0 auto; }
+        
+        /* فیلترها */
+        .filters {
+            width: 250px; background: white; border-radius: 15px; padding: 20px;
+            height: fit-content; position: sticky; top: 100px;
+        }
+        .filters h3 { margin-bottom: 15px; color: #333; font-size: 1rem; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; margin-bottom: 8px; color: #555; font-size: 0.85rem; cursor: pointer; }
+        .filter-group input[type="checkbox"] { margin-left: 8px; accent-color: #e94560; }
+        .price-range { display: flex; gap: 5px; align-items: center; }
+        .price-range input {
+            width: 80px; padding: 6px; border: 1px solid #ddd; border-radius: 5px;
+            font-family: Tahoma; text-align: center;
+        }
+        .filter-btn {
+            width: 100%; background: #e94560; color: white; border: none;
+            padding: 8px; border-radius: 8px; cursor: pointer; font-family: Tahoma;
+        }
+        
+        /* محصولات */
+        .products-area { flex: 1; }
+        .products-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; flex-wrap: wrap; gap: 10px;
+        }
+        .sort-select {
+            padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px;
+            font-family: Tahoma; cursor: pointer;
+        }
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        
+        /* کارت محصول */
+        .product-card {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: 0.3s; position: relative;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .product-img {
+            width: 100%; height: 220px; object-fit: cover; background: #f9f9f9;
+        }
+        .product-actions {
+            position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 5px;
+        }
+        .action-btn {
+            background: white; border: none; width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .action-btn:hover { background: #e94560; color: white; }
+        .action-btn.liked { background: #e94560; color: white; }
+        .product-info { padding: 12px 15px 15px; }
+        .product-category { font-size: 0.7rem; color: #e94560; margin-bottom: 4px; }
+        .product-name { font-weight: bold; font-size: 0.95rem; color: #333; margin-bottom: 4px; }
+        .stars { color: #f39c12; font-size: 0.85rem; margin-bottom: 6px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; }
+        .price { font-weight: bold; color: #e94560; font-size: 1.1rem; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 0.8rem; }
+        .add-cart-btn {
+            width: 100%; background: #e94560; color: white; border: none;
+            padding: 10px; border-radius: 8px; cursor: pointer; font-family: Tahoma;
+            font-weight: bold; margin-top: 8px; transition: 0.3s;
+        }
+        .add-cart-btn:hover { background: #c73652; }
+        .stock-badge {
+            position: absolute; top: 10px; right: 10px; padding: 4px 10px;
+            border-radius: 10px; font-size: 0.7rem; font-weight: bold;
+        }
+        .in-stock { background: #d4edda; color: #155724; }
+        
+        /* سبد خرید */
+        .cart-panel {
+            position: fixed; top: 0; left: -450px; width: 420px; height: 100vh;
+            background: white; z-index: 300; transition: 0.4s; display: flex; flex-direction: column;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+        }
+        .cart-panel.open { left: 0; }
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 299; display: none;
+        }
+        .cart-overlay.show { display: block; }
+        .cart-header {
+            background: #e94560; color: white; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .close-cart { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 15px; }
+        .cart-footer { padding: 15px 20px; border-top: 2px solid #eee; }
+        .cart-total { font-size: 1.2rem; font-weight: bold; text-align: center; margin-bottom: 10px; }
+        .checkout-btn {
+            width: 100%; background: #4ecca3; color: white; border: none;
+            padding: 12px; border-radius: 10px; font-size: 1.1rem;
+            font-weight: bold; cursor: pointer; font-family: Tahoma;
+        }
+        
+        /* فوتر */
+        .footer {
+            background: #333; color: white; padding: 30px 20px; margin-top: 40px;
+            text-align: center;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; max-width: 1000px; margin: 0 auto 20px; text-align: right;
+        }
+        .footer-col h4 { margin-bottom: 10px; color: #e94560; }
+        .footer-col p, .footer-col a { color: #ccc; font-size: 0.85rem; display: block; margin: 5px 0; }
+        
+        @media (max-width: 768px) {
+            .main-content { flex-direction: column; }
+            .filters { width: 100%; position: static; }
+            .cart-panel { width: 100%; left: -100%; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">🚀 ارسال رایگان برای سفارش‌های بالای ۵۰۰ هزار تومان!</div>
+
+    <!-- هدر -->
+    <div class="header">
+        <a href="#" class="logo">🛒 مامان‌شاپ</a>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 دنبال چی میگردی؟">
+            <button onclick="searchProducts()">جستجو</button>
+        </div>
+        <div class="header-icons">
+            <button class="icon-btn" id="favoritesBtn" title="علاقه‌مندی‌ها">❤️<span class="badge" id="favCount">0</span></button>
+            <button class="icon-btn" onclick="openCart()" title="سبد خرید">🛒<span class="badge" id="cartCount">0</span></button>
+        </div>
+    </div>
+
+    <!-- اسلایدر -->
+    <div class="slider">
+        <h2>🎉 تخفیف ویژه این هفته!</h2>
+        <p>محصولات خونگی مامان با بهترین کیفیت و قیمت</p>
+        <button class="slider-btn">مشاهده محصولات 👈</button>
+    </div>
+
+    <!-- دسته‌بندی -->
+    <div class="cat-nav">
+        <div class="cat-item active" onclick="filterCategory('all')"><span class="cat-icon">🏠</span>همه</div>
+        <div class="cat-item" onclick="filterCategory('cake')"><span class="cat-icon">🎂</span>کیک</div>
+        <div class="cat-item" onclick="filterCategory('food')"><span class="cat-icon">🍔</span>غذا</div>
+        <div class="cat-item" onclick="filterCategory('handmade')"><span class="cat-icon">🧵</span>دستی</div>
+        <div class="cat-item" onclick="filterCategory('jam')"><span class="cat-icon">🍯</span>مربا و ترشی</div>
+    </div>
+
+    <!-- محتوای اصلی -->
+    <div class="main-content">
+        <!-- فیلترها -->
+        <div class="filters">
+            <h3>⚙️ فیلترها</h3>
+            <div class="filter-group">
+                <h4 style="margin-bottom:8px;">دسته‌بندی</h4>
+                <label><input type="checkbox" checked> همه</label>
+                <label><input type="checkbox"> کیک و شیرینی</label>
+                <label><input type="checkbox"> غذا</label>
+                <label><input type="checkbox"> دستی</label>
+                <label><input type="checkbox"> مربا و ترشی</label>
+            </div>
+            <div class="filter-group">
+                <h4 style="margin-bottom:8px;">محدوده قیمت</h4>
+                <div class="price-range">
+                    <input type="number" placeholder="از" id="priceFrom">
+                    <span>-</span>
+                    <input type="number" placeholder="تا" id="priceTo">
+                </div>
+            </div>
+            <button class="filter-btn" onclick="applyFilters()">اعمال فیلتر</button>
+        </div>
+
+        <!-- محصولات -->
+        <div class="products-area">
+            <div class="products-header">
+                <span style="color:#666;">📦 <span id="productCount">0</span> محصول</span>
+                <select class="sort-select" onchange="sortProducts(this.value)">
+                    <option value="default">مرتب‌سازی: پیش‌فرض</option>
+                    <option value="cheapest">ارزان‌ترین</option>
+                    <option value="expensive">گران‌ترین</option>
+                    <option value="popular">محبوب‌ترین</option>
+                </select>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </div>
+
+    <!-- سبد خرید -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <span>🛒 سبد خرید</span>
+            <button class="close-cart" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total" id="cartTotal">جمع: ۰ تومان</div>
+            <button class="checkout-btn" onclick="checkout()">💳 ثبت سفارش</button>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <div class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>🛒 مامان‌شاپ</h4>
+                <p>محصولات خونگی و تازه</p>
+                <p>با عشق مامان ❤️</p>
+            </div>
+            <div class="footer-col">
+                <h4>📞 تماس</h4>
+                <p>۰۹۱۲۳۴۵۶۷۸۹</p>
+                <p>تهران، خیابان اصلی</p>
+            </div>
+            <div class="footer-col">
+                <h4>🔗 لینک‌ها</h4>
+                <a href="#">درباره ما</a>
+                <a href="#">قوانین</a>
+                <a href="#">پیگیری سفارش</a>
+            </div>
+        </div>
+        <p style="color:#888;">© ۲۰۲۶ مامان‌شاپ - تمام حقوق محفوظ است</p>
+    </div>
+
+    <script>
+        var products = [
+            { id:1, name:'کیک شکلاتی مخصوص', desc:'کیک خونگی با شکلات بلژیکی، تازه و خوشمزه', price:150000, oldPrice:200000, image:'images/cake1.jpg', cat:'cake', rating:4.8, reviews:24, stock:true },
+            { id:2, name:'شال گردن دستباف', desc:'کاموای مرغوب، گرم و نرم، طرح زمستانه', price:250000, oldPrice:0, image:'images/scarf.jpg', cat:'handmade', rating:4.9, reviews:18, stock:true },
+            { id:3, name:'ترشی مخلوط خانگی', desc:'۷ نوع سبزیجات تازه، کاملاً طبیعی', price:120000, oldPrice:150000, image:'images/torshi.jpg', cat:'jam', rating:4.5, reviews:32, stock:true },
+            { id:4, name:'کوکی شکلاتی (۱۲ عدد)', desc:'کوکی نرم با چیپس شکلات واقعی', price:80000, oldPrice:0, image:'images/cookie.jpg', cat:'cake', rating:4.7, reviews:15, stock:true },
+            { id:5, name:'کیف قلاب‌بافی طرح گل', desc:'دستباف با نخ پنبه، جادار و شیک', price:320000, oldPrice:400000, image:'images/bag.jpg', cat:'handmade', rating:5.0, reviews:9, stock:false },
+            { id:6, name:'مربای توت فرنگی', desc:'توت فرنگی تازه، شکر کم، طبیعی', price:95000, oldPrice:120000, image:'images/jam.jpg', cat:'jam', rating:4.6, reviews:21, stock:true },
+            { id:7, name:'کیک هویج و گردو', desc:'کیک مرطوب با هویج تازه و گردوی ایرانی', price:130000, oldPrice:0, image:'images/cake2.jpg', cat:'cake', rating:4.4, reviews:12, stock:true },
+            { id:8, name:'نان بربری تازه', desc:'سبوس‌دار، تازه و داغ، کنجدی', price:30000, oldPrice:0, image:'images/bread.jpg', cat:'food', rating:4.3, reviews:45, stock:true },
+        ];
+
+        var cart = JSON.parse(localStorage.getItem('mamanCart') || '[]');
+        var favorites = JSON.parse(localStorage.getItem('mamanFav') || '[]');
+        var currentCat = 'all';
+
+        function renderProducts(list) {
+            var data = list || products;
+            document.getElementById('productCount').textContent = data.length;
+            var grid = document.getElementById('productsGrid');
+            
+            if (data.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#999;">😔 محصولی یافت نشد</div>';
+                return;
+            }
+
+            grid.innerHTML = data.map(function(p) {
+                var starsHtml = '';
+                for (var i = 1; i <= 5; i++) {
+                    starsHtml += i <= Math.round(p.rating) ? '⭐' : '☆';
+                }
+                
+                return '<div class="product-card">' +
+                    '<img src="' + p.image + '" class="product-img" alt="' + p.name + '" onerror="this.src=\'https://via.placeholder.com/300x220/f9f9f9/999?text=' + encodeURIComponent(p.name) + '\'">' +
+                    (p.oldPrice > 0 ? '<span class="stock-badge in-stock" style="top:50px;">🔥 ' + Math.round((1-p.price/p.oldPrice)*100) + '%</span>' : '') +
+                    '<span class="stock-badge ' + (p.stock ? 'in-stock' : '') + '">' + (p.stock ? '✅ موجود' : '❌ تمام شد') + '</span>' +
+                    '<div class="product-actions">' +
+                        '<button class="action-btn ' + (favorites.includes(p.id) ? 'liked' : '') + '" onclick="toggleFav(' + p.id + ')">❤️</button>' +
+                    '</div>' +
+                    '<div class="product-info">' +
+                        '<div class="product-category">' + getCatName(p.cat) + '</div>' +
+                        '<div class="product-name">' + p.name + '</div>' +
+                        '<div class="stars">' + starsHtml + ' ' + p.rating + ' (' + p.reviews + ' نظر)</div>' +
+                        '<div class="price-row">' +
+                            '<div><span class="price">' + p.price.toLocaleString('fa-IR') + ' تومان</span>' +
+                            (p.oldPrice > 0 ? ' <span class="old-price">' + p.oldPrice.toLocaleString('fa-IR') + '</span>' : '') + '</div>' +
+                        '</div>' +
+                        '<button class="add-cart-btn" onclick="addToCart(' + p.id + ')" ' + (!p.stock ? 'disabled style="background:#ccc;"' : '') + '>' +
+                            (p.stock ? '🛒 افزودن به سبد' : 'ناموجود') +
+                        '</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function getCatName(cat) {
+            var names = { cake:'🎂 کیک و شیرینی', food:'🍔 غذا', handmade:'🧵 دستی', jam:'🍯 مربا و ترشی' };
+            return names[cat] || cat;
+        }
+
+        function addToCart(id) {
+            var p = products.find(function(x) { return x.id === id; });
+            var c = cart.find(function(x) { return x.id === id; });
+            if (c) { c.qty++; }
+            else { cart.push({ id:p.id, name:p.name, price:p.price, image:p.image, qty:1 }); }
+            saveCart(); updateCartUI(); openCart();
+        }
+
+        function toggleFav(id) {
+            var idx = favorites.indexOf(id);
+            if (idx > -1) { favorites.splice(idx, 1); }
+            else { favorites.push(id); }
+            localStorage.setItem('mamanFav', JSON.stringify(favorites));
+            document.getElementById('favCount').textContent = favorites.length;
+            renderProducts();
+        }
+
+        function filterCategory(cat) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-item').forEach(function(el) { el.classList.remove('active'); });
+            var filtered = cat === 'all' ? products : products.filter(function(p) { return p.cat === cat; });
+            renderProducts(filtered);
+        }
+
+        function searchProducts() {
+            var q = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (!q) { renderProducts(); return; }
+            var filtered = products.filter(function(p) {
+                return p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+            });
+            renderProducts(filtered);
+        }
+
+        function sortProducts(type) {
+            var sorted = products.slice();
+            if (type === 'cheapest') sorted.sort(function(a,b) { return a.price - b.price; });
+            if (type === 'expensive') sorted.sort(function(a,b) { return b.price - a.price; });
+            if (type === 'popular') sorted.sort(function(a,b) { return b.rating - a.rating; });
+            renderProducts(sorted);
+        }
+
+        function applyFilters() {
+            var from = parseInt(document.getElementById('priceFrom').value) || 0;
+            var to = parseInt(document.getElementById('priceTo').value) || 99999999;
+            var filtered = products.filter(function(p) { return p.price >= from && p.price <= to; });
+            renderProducts(filtered);
+        }
+
+        function saveCart() { localStorage.setItem('mamanCart', JSON.stringify(cart)); }
+        
+        function updateCartUI() {
+            var total = cart.reduce(function(s, c) { return s + c.qty; }, 0);
+            document.getElementById('cartCount').textContent = total;
+            document.getElementById('favCount').textContent = favorites.length;
+            
+            var items = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                items.innerHTML = '<div style="text-align:center;color:#999;padding:40px;">😔 سبد خرید خالیه!</div>';
+                document.getElementById('cartTotal').textContent = 'جمع: ۰ تومان';
+                return;
+            }
+            
+            items.innerHTML = cart.map(function(c) {
+                return '<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;align-items:center;">' +
+                    '<img src="' + c.image + '" style="width:50px;height:50px;border-radius:8px;object-fit:cover;" onerror="this.style.background=\'#f0f0f0\'">' +
+                    '<div style="flex:1;"><div style="font-weight:bold;font-size:0.85rem;">' + c.name + '</div>' +
+                    '<div style="color:#e94560;font-weight:bold;">' + (c.price * c.qty).toLocaleString('fa-IR') + ' تومان</div></div>' +
+                    '<button onclick="removeFromCart(' + c.id + ')" style="background:none;border:none;color:#e94560;cursor:pointer;font-size:1.2rem;">🗑️</button>' +
+                '</div>';
+            }).join('');
+            
+            var sum = cart.reduce(function(s, c) { return s + (c.price * c.qty); }, 0);
+            document.getElementById('cartTotal').textContent = 'جمع: ' + sum.toLocaleString('fa-IR') + ' تومان';
+        }
+
+        function removeFromCart(id) { cart = cart.filter(function(c) { return c.id !== id; }); saveCart(); updateCartUI(); }
+        function openCart() { document.getElementById('cartPanel').classList.add('open'); document.getElementById('cartOverlay').classList.add('show'); }
+        function closeCart() { document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('show'); }
+        
+        function checkout() {
+            if (cart.length === 0) { alert('😔 سبد خرید خالیه!'); return; }
+            var sum = cart.reduce(function(s, c) { return s + (c.price * c.qty); }, 0);
+            var msg = '🛒 سفارش جدید:\n\n';
+            cart.forEach(function(c) { msg += '• ' + c.name + ' (×' + c.qty + '): ' + (c.price*c.qty).toLocaleString('fa-IR') + ' تومان\n'; });
+            msg += '\n💰 جمع: ' + sum.toLocaleString('fa-IR') + ' تومان\n📞 لطفاً تماس بگیرید: ۰۹۱۲۳۴۵۶۷۸۹';
+            alert(msg);
+            cart = []; saveCart(); updateCartUI(); closeCart();
+        }
+
+        updateCartUI();
+        renderProducts();
+    </script>
+</body>
+</html>
