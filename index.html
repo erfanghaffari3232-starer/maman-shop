@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>______ | محصولات خونگی</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- بنر تخفیف -->
+    <div class="top-banner">______</div>
+
+    <!-- هدر -->
+    <header class="header">
+        <a href="#" class="logo">______</a>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 دنبال چی میگردی؟">
+            <button onclick="searchProducts()">جستجو</button>
+        </div>
+        <div class="header-icons">
+            <button class="icon-btn" title="علاقه‌مندی">
+                ❤️<span class="badge" id="favCount">0</span>
+            </button>
+            <button class="icon-btn" onclick="openCart()" title="سبد خرید">
+                🛒<span class="badge" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- اسلایدر -->
+    <section class="slider">
+        <h2>______</h2>
+        <p>______</p>
+        <button class="slider-btn" onclick="document.querySelector('.products-area').scrollIntoView({behavior:'smooth'})">🛍️ مشاهده محصولات</button>
+    </section>
+
+    <!-- دسته‌بندی -->
+    <nav class="cat-nav">
+        <div class="cat-item active" onclick="filterCategory('all')"><span class="cat-icon">🏠</span>همه</div>
+        <div class="cat-item" onclick="filterCategory('cake')"><span class="cat-icon">🎂</span>______</div>
+        <div class="cat-item" onclick="filterCategory('food')"><span class="cat-icon">🍔</span>______</div>
+        <div class="cat-item" onclick="filterCategory('handmade')"><span class="cat-icon">🧵</span>______</div>
+        <div class="cat-item" onclick="filterCategory('jam')"><span class="cat-icon">🍯</span>______</div>
+    </nav>
+
+    <!-- محتوای اصلی -->
+    <main class="main-content">
+        
+        <!-- فیلترها -->
+        <aside class="filters">
+            <h3>⚙️ فیلتر محصولات</h3>
+            <div class="filter-group">
+                <h4>دسته‌بندی</h4>
+                <label><input type="checkbox" checked> همه</label>
+                <label><input type="checkbox"> ______</label>
+                <label><input type="checkbox"> ______</label>
+                <label><input type="checkbox"> ______</label>
+                <label><input type="checkbox"> ______</label>
+            </div>
+            <div class="filter-group">
+                <h4>محدوده قیمت (تومان)</h4>
+                <div class="price-range">
+                    <input type="number" id="priceFrom" placeholder="از">
+                    <span>-</span>
+                    <input type="number" id="priceTo" placeholder="تا">
+                </div>
+            </div>
+            <button class="filter-btn" onclick="applyFilters()">🔍 اعمال فیلتر</button>
+        </aside>
+
+        <!-- محصولات -->
+        <section class="products-area">
+            <div class="products-header">
+                <span style="color:#666;">📦 <strong id="productCount">0</strong> محصول</span>
+                <select class="sort-select" onchange="sortProducts(this.value)">
+                    <option value="default">مرتب‌سازی: پیش‌فرض</option>
+                    <option value="cheapest">ارزان‌ترین</option>
+                    <option value="expensive">گران‌ترین</option>
+                    <option value="popular">محبوب‌ترین</option>
+                </select>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+    </main>
+
+    <!-- سبد خرید -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <aside class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <span>🛒 سبد خرید</span>
+            <button class="close-cart" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div style="text-align:center;color:#999;padding:40px;">😔 سبد خرید خالیه!</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total" id="cartTotal">💰 جمع: ۰ تومان</div>
+            <button class="checkout-btn" onclick="checkout()">💳 ثبت سفارش و پرداخت</button>
+        </div>
+    </aside>
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>______</h4>
+                <p>______</p>
+                <p>______</p>
+            </div>
+            <div class="footer-col">
+                <h4>📞 تماس با ما</h4>
+                <p>______</p>
+                <p>______</p>
+                <p>______</p>
+            </div>
+            <div class="footer-col">
+                <h4>🔗 دسترسی سریع</h4>
+                <a href="#">درباره ما</a>
+                <a href="#">قوانین و مقررات</a>
+                <a href="#">پیگیری سفارش</a>
+                <a href="#">سوالات متداول</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p id="bankInfoFooter"></p>
+            <p>© ______ - تمام حقوق محفوظ است | ساخته شده با ❤️</p>
+        </div>
+    </footer>
+
+    <!-- فایل‌های جاوااسکریپت -->
+    <script src="script.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>
