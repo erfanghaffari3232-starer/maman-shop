@@ -66,10 +66,10 @@ function buildSlider() {
 function buildCategories() {
     var cats = [
         { id: 'all', name: 'همه', icon: '🏠' },
-        { id: 'cake', name: '______', icon: '🎂' },
-        { id: 'food', name: '______', icon: '🍔' },
-        { id: 'handmade', name: '______', icon: '🧵' },
-        { id: 'jam', name: '______', icon: '🍯' }
+        { id: 'cake', name: 'کیک و شیرینی', icon: '🎂' },
+        { id: 'food', name: 'غذا', icon: '🍔' },
+        { id: 'handmade', name: 'صنایع دستی', icon: '🧵' },
+        { id: 'jam', name: 'ترشی و مربا', icon: '🍯' }
     ];
     
     document.getElementById('catNav').innerHTML = cats.map(function(c) {
